@@ -2,12 +2,15 @@ package hello;
 
 import org.springframework.data.annotation.Id;
 
+import java.time.LocalDate;
+
 public class Person {
 
 	@Id private String id;
 
 	private String firstName;
 	private String lastName;
+	private LocalDate dateOfBirth;
 
 	public String getFirstName() {
 		return firstName;
@@ -24,4 +27,13 @@ public class Person {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
 }

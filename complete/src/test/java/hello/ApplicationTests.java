@@ -19,18 +19,16 @@ package hello;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
@@ -69,13 +67,14 @@ public class ApplicationTests {
 	public void shouldRetrieveEntity() throws Exception {
 
 		MvcResult mvcResult = mockMvc.perform(post("/people").content(
-				"{\"firstName\": \"Frodo\", \"lastName\":\"Baggins\"}")).andExpect(
-						status().isCreated()).andReturn();
+				"{\"firstName\": \"Frodo\", \"lastName\":\"Baggins\", \"dateOfBirth\":\"1996-03-21\"}")).andExpect(
+				status().isCreated()).andReturn();
 
 		String location = mvcResult.getResponse().getHeader("Location");
 		mockMvc.perform(get(location)).andExpect(status().isOk()).andExpect(
 				jsonPath("$.firstName").value("Frodo")).andExpect(
-						jsonPath("$.lastName").value("Baggins"));
+				jsonPath("$.lastName").value("Baggins")).andExpect(
+				jsonPath("$.dateOfBirth.content").value("1996-03-21"));
 	}
 
 	@Test
