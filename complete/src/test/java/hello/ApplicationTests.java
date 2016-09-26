@@ -74,7 +74,7 @@ public class ApplicationTests {
 		mockMvc.perform(get(location)).andExpect(status().isOk()).andExpect(
 				jsonPath("$.firstName").value("Frodo")).andExpect(
 				jsonPath("$.lastName").value("Baggins")).andExpect(
-				jsonPath("$.dateOfBirth.content").value("1996-03-21"));
+				jsonPath("$.dateOfBirth").value("1996-03-21"));
 	}
 
 	@Test
