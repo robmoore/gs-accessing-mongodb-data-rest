@@ -1,8 +1,7 @@
 package hello;
 
-import org.springframework.data.annotation.Id;
-
 import org.joda.time.LocalDate;
+import org.springframework.data.annotation.Id;
 
 public class Person {
 
